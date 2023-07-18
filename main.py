@@ -14,26 +14,27 @@ class Jogador:
 class NoLista:
     def __init__(self, jogador):
         self.jogador = jogador
-        self.proximo = None
+        self.proximo = None # salva o endereço do proximo elemento
 
-class ListaEncadeada:
+class ListaEncadeada: # aqui inicia a lista encadeada, definindo jogadores como none
     def __init__(self):
         self.jogadores = None
 
     def adicionar_jogador(self, jogador):
-        numeroCamisa = NoLista(jogador)
+        numeroCamisa = NoLista(jogador) # cria um novo nó chamado numeroCamisa
 
-        if self.jogadores is None:
+        if self.jogadores is None: #se jogadores for none o numeroCamisa se torna o primeiro nó, atribuindo a jogadores
             self.jogadores = numeroCamisa
-        else:
-            if jogador.numero_camisa < self.jogadores.jogador.numero_camisa:
-                numeroCamisa.proximo = self.jogadores
-                self.jogadores = numeroCamisa
-            else:
+        else: #se lista não tiver vazia ele segue aqui
+            if jogador.numero_camisa < self.jogadores.jogador.numero_camisa: #verifica se o numero da camisa for menor q a camisa do jogador do primeiro nó
+                numeroCamisa.proximo = self.jogadores #se for menor ele insere antes do primeiro nó da lista
+                self.jogadores = numeroCamisa #primeiro nó é atualizado
+
+            else: #aqui começa a parte quando o numero é maior que o anterior
                 atual = self.jogadores
                 anterior = None
 
-                while atual is not None and jogador.numero_camisa > atual.jogador.numero_camisa:
+                while atual is not None and jogador.numero_camisa > atual.jogador.numero_camisa: # é um loop que ira testar um por um para ver se a camisa é maior que o anterior
                     anterior = atual
                     atual = atual.proximo
 
@@ -73,3 +74,4 @@ while True:
         break
     else:
         print("Opção inválida. Digite novamente.")
+
